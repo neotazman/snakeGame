@@ -18,11 +18,13 @@ function main(currentTime) { //the function that runs the game
 
 function update() {
     updateSnake()
+    updateFood()
 }
 
 function draw() {
     gameBoard.innerHTML = ''
     drawSnake(gameBoard)
+    drawFood(gameBoard)
 }
 
 window.requestAnimationFrame(main)
