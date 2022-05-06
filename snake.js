@@ -1,26 +1,22 @@
 
-const SNAKE_SPEED = 2
-const snakeBody = [
-    { x: 10, y : 11 },
-    { x: 11, y : 11 },
-    { x: 12, y : 11 },
-    { x: 13, y : 11 },
-]
+const SNAKE_SPEED = 2 //can be changed to alter the difficulty -- only manually right now
+const snakeBody = [{ x: 10, y : 11 }]
 
-function updateSnake() {
+function updateSnake() { //the function that decide HOW the snake moves
+    const moveDirection = getInputDirection() // can't use the same variable because exports don't work
     for(let i = snakeBody.length - 2; i >= 0; i--) {
         snakeBody[i + 1] = { ...snakeBody[i] }
     }
 
-    snakeBody[0].x+= 1
-    snakeBody[0].y+= 0
+    snakeBody[0].x+= moveDirection.x
+    snakeBody[0].y+= moveDirection.y
 }
 
-function drawSnake(gameBoard) {
+function drawSnake(gameBoard) { // puts the snake on the board
     snakeBody.forEach(segment => {
         const snakeElement = document.createElement('div')
-        snakeElement.style.gridRowStart = segment.x
-        snakeElement.style.gridColumnStart = segment.y
+        snakeElement.style.gridRowStart = segment.y
+        snakeElement.style.gridColumnStart = segment.x
         snakeElement.classList.add('snake')
         gameBoard.appendChild(snakeElement)
     })
